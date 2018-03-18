@@ -1,7 +1,7 @@
 import {RequestFunction} from "spiel-connect";
 
-export interface ISure {
-    [key: string]: boolean;
+export interface IEvent {
+    target: HTMLInputElement;
 }
 
 export interface IPeople {
@@ -16,6 +16,7 @@ export interface IPerson {
     superPower: boolean;
     genius: boolean;
     _id?: string;
+    [key: string]: string | boolean | undefined;
 }
 
 export interface ISidebar {
@@ -31,17 +32,21 @@ export interface IField {
 }
 
 export interface IForm {
-    [key: string]: FormData;
+    [key: string]: any;
 }
 
 export interface IAddForm {
-    addForm: (form: IForm) => void;
+    submitForm: (form: any) => Promise<void>;
     fields: IField[];
-    textForm: (event: Event) => void;
-    checkForm: (event: Event) => void;
+    textForm?: (event: IEvent, field: IField) => void;
+    checkForm?: (event: IEvent, field: IField) => void;
     form: IForm;
     submitTitle: string;
     title: string;
+}
+
+export interface ISure {
+    [key: string]: boolean;
 }
 
 export interface IBody {
@@ -56,4 +61,26 @@ export interface IHeader {
     cols: IField[];
     orderCols: (colName: string) => void;
     titles: string[];
+}
+
+export interface IFilter {
+    filter: string;
+}
+
+export interface IListState extends ISidebar {
+    totalPeople: IPerson[];
+    error: boolean;
+    form: IForm;
+    message: string;
+    params: IFilter;
+    sure: ISure;
+    order: boolean;
+}
+
+export interface ISort {
+    [key: string]: number;
+}
+
+export interface IQuery {
+    sort: ISort | null;
 }

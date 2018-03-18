@@ -6,14 +6,14 @@ export function THeader({cols, orderCols, titles}: IHeader) {
     const headers = titles.map((col, index) => {
         if (cols[index]) {
             return (<td onclick={() => orderCols(cols[index].name)}>{col}
-                 <i class="glyphicon glyphicon-sort"></i></td>);
+                 <Icon class="ion-chevron-down"></Icon></td>);
         }
         return (<td>{col}</td>);
     });
 
     return(
         <thead>
-            {cols}
+            {headers}
         </thead>
     );
 }

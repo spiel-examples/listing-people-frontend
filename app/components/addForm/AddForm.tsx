@@ -1,8 +1,8 @@
 import { h } from "spiel-client";
-import { IAddForm, IField, IForm } from "../../helpers";
+import { IAddForm, IEvent, IField, IForm } from "../../helpers";
 import { FormComponent, Label, Submit } from "./AddFormStyles";
 
-export function AddForm({addForm, checkForm, fields, form, title, submitTitle, textForm}: IAddForm) {
+export function AddForm({submitForm, fields, form, title, submitTitle, checkForm, textForm}: IAddForm) {
     const template = fields.map((field: IField) => {
         let fragment = null;
 
@@ -14,7 +14,11 @@ export function AddForm({addForm, checkForm, fields, form, title, submitTitle, t
                     type={field.type}
                     placeholder={field.placeholder}
                     value={form[field.name]}
-                    oninput={(event: Event) => textForm(event)}>
+                    oninput={(event: IEvent) => {
+                        if (textForm) {
+                            textForm(event, field);
+                        }
+                    }}>
                 </input>
             </div>;
         } else if (field.type === "checkbox") {
@@ -23,10 +27,16 @@ export function AddForm({addForm, checkForm, fields, form, title, submitTitle, t
                 <input
                     type={field.type}
                     checked={form[field.name]}
-                    onchange={(event: any) => checkForm(event)}>
+                    onchange={(event: IEvent) => {
+                        if (checkForm) {
+                            checkForm(event, field);
+                        }
+                    }}>
                 </input>
             </div>;
         }
+
+        return fragment;
     });
     return (
         <FormComponent>
@@ -34,7 +44,7 @@ export function AddForm({addForm, checkForm, fields, form, title, submitTitle, t
             <div class="form">
                 <div class="form-inline">
                     {template}
-                    <Submit class="btn btn-success" onclick={() => addForm(form)}>Add</Submit>
+                    <Submit class="btn btn-success" onclick={() => submitForm(form)}>Add</Submit>
                 </div>
             </div>
             <div class="message">

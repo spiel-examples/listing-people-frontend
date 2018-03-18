@@ -1,4 +1,5 @@
-import { picostyle, VNode } from "picostyle";
+import picostyle from "picostyle";
+import { VNode } from "picostyle";
 import { h } from "spiel-client";
 
 const ps = picostyle(h);

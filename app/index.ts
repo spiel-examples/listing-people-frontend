@@ -1,6 +1,7 @@
-import "bootstrap/scss/bootstrap.scss";
+import "regenerator/runtime";
 import {IConfigRouters, srouter} from "spiel-client";
 import {Connect, IRequestConfigConnect} from "spiel-connect";
+import "./app.scss";
 import {services} from "./helpers";
 import {routes} from "./routes";
 
