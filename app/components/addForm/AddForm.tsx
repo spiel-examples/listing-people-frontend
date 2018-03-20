@@ -1,6 +1,6 @@
 import { h } from "spiel-client";
 import { IAddForm, IEvent, IField, IForm } from "../../helpers";
-import { FormComponent, Label, Submit } from "./AddFormStyles";
+import "./AddForm.scss";
 
 export function AddForm({submitForm, fields, form, title, submitTitle, checkForm, textForm}: IAddForm) {
     const template = fields.map((field: IField) => {
@@ -8,7 +8,7 @@ export function AddForm({submitForm, fields, form, title, submitTitle, checkForm
 
         if (field.type === "text") {
             fragment = <div class="form-group">
-                {(field.title) ? <Label></Label> : null}
+                {(field.title) ? <label></label> : null}
                 <input
                     class="form-control"
                     type={field.type}
@@ -23,7 +23,7 @@ export function AddForm({submitForm, fields, form, title, submitTitle, checkForm
             </div>;
         } else if (field.type === "checkbox") {
             fragment = <div class="form-group">
-                {(field.title) ? <Label>{field.title}</Label> : null}
+                {(field.title) ? <label>{field.title}</label> : null}
                 <input
                     type={field.type}
                     checked={form[field.name]}
@@ -39,17 +39,17 @@ export function AddForm({submitForm, fields, form, title, submitTitle, checkForm
         return fragment;
     });
     return (
-        <FormComponent>
+        <div class= "form-component">
             <h2>{title}</h2>
             <div class="form">
                 <div class="form-inline">
                     {template}
-                    <Submit class="btn btn-success" onclick={() => submitForm(form)}>Add</Submit>
+                    <button class="submit btn btn-success" onclick={() => submitForm(form)}>Add</button>
                 </div>
             </div>
             <div class="message">
                 <span></span>
             </div>
-        </FormComponent>
+        </div>
     );
 }

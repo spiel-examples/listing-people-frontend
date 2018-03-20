@@ -68,6 +68,7 @@ export interface IFilter {
 }
 
 export interface IListState extends ISidebar {
+    lastState: any;
     totalPeople: IPerson[];
     error: boolean;
     form: IForm;

@@ -65,7 +65,7 @@ export class ListController {
     public async addPerson(person: IPerson) {
         try {
             await this.peopleService.addPerson(null, null, person);
-            this.state.form = {};
+            this.cleanForm();
             this.filterTable("");
         } catch (error) {
             this.state.error = true;
@@ -84,6 +84,7 @@ export class ListController {
             const newPerson = await this.peopleService.deletePerson(user);
             const index = this.state.people.findIndex((person: IPerson) => person._id === id);
             this.state.people.splice(index, 1);
+            this.state.totalPeople.splice(0, this.state.totalPeople.length, ...this.state.people);
             render(this.view, this.state);
         } catch (error) {
             console.log(error);
@@ -99,8 +100,9 @@ export class ListController {
     }
 
     public filterTable(filter: string) {
-        const url: string = (filter) ? `/list/${filter}` : "/list";
-        srouter.go(url);
+        const path = (filter) ? `/list/${filter}` : "/list";
+        this.state.params = {filter};
+        srouter.go(path);
         this.getPeople();
     }
 
@@ -113,5 +115,19 @@ export class ListController {
     public changeSure(id: string) {
         this.state.sure[id] = !this.state.sure[id];
         render(this.view, this.state);
+    }
+
+    private cleanForm() {
+        Object.keys(this.state.form).forEach((element: any) => {
+            let isTypeText: boolean;
+            isTypeText = this.fields.some((field: IField) =>
+                field.name === element && field.type === "text");
+
+            if (isTypeText) {
+                this.state.form[element] = "";
+            } else {
+                this.state.form[element] = null;
+            }
+        });
     }
 }
