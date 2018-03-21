@@ -66,8 +66,11 @@ export class ListController {
         try {
             await this.peopleService.addPerson(null, null, person);
             this.cleanForm();
-            this.filterTable("");
-            this.getPeople();
+            if (this.state.params && this.state.params.filter) {
+                this.filterTable("");
+            } else {
+                this.getPeople();
+            }
         } catch (error) {
             console.log(this.state.form);
 
