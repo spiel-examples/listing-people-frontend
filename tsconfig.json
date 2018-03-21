@@ -5,6 +5,7 @@
 		"sourceMap": true,
 		"strict": true,
 		"emitDecoratorMetadata": true,
+		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"declaration": true,
 		"outDir": "./lib",
@@ -13,7 +14,7 @@
 		"jsxFactory": "h"
 	},
 	"include": [
-		"app"
+		"./app"
 	],
 	"exclude": [
 		"node_modules"

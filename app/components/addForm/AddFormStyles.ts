@@ -15,3 +15,7 @@ export const Label = ps("label")({
 export const Submit = ps("button")({
     marginLeft: "10px",
 });
+
+export const Error = ps("span")({
+    color: "red",
+});

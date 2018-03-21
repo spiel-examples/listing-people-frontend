@@ -5,7 +5,6 @@ import {ListController} from "./listController";
 
 export class List implements IPage {
     public state = {
-        error: false,
         form: {},
         message: "",
         order: false,
@@ -21,9 +20,7 @@ export class List implements IPage {
                 let button = null;
                 if (field.name !== "name") {
                     button = <button
-                        onclick={(event: Event) => {
-                                listController.filterTable(field.name);
-                        }}
+                        onclick={(event: Event) => listController.filterTable(field.name)}
                         class={"btn btn-primary " +
                             (state.params && state.params.filter === field.name ? "active" : "")}
                         disabled={!state.totalPeople.some((person: any) => person[field.name])}>{field.title}
@@ -41,6 +38,7 @@ export class List implements IPage {
                                 submitForm= {listController.addPerson.bind(listController)}
                                 fields= {listController.fields}
                                 form= {state.form}
+                                error= {state.message}
                                 textForm= {listController.getTextInput.bind(listController)}
                                 checkForm= {listController.getCheckInput.bind(listController)}
                                 submitTitle= "Add person"

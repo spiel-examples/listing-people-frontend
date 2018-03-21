@@ -19,8 +19,8 @@ export function TBody({changeSure, cols, deleteRow, elements, sure}: IBody) {
             <td class="text-center delete">
                 {sure[element._id] ?
                     <p>Are you sure?
-                        <a class="btn btn-warning" onclick={() => deleteRow(element._id)}>yes</a>
-                        <a class="btn btn-default" onclick={() => changeSure(element._id)}>No</a></p>
+                        <Link class="btn btn-warning" onclick={() => deleteRow(element._id)}>yes</Link>
+                        <Link class="btn btn-default" onclick={() => changeSure(element._id)}>No</Link></p>
                     : <button class="btn btn-danger" onclick={() => changeSure(element._id)}>X</button>}
             </td>
         </tr>,

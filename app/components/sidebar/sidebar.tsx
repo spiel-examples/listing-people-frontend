@@ -9,7 +9,7 @@ export function Sidebar({people}: ISidebar) {
 
     const skills = (
         <div>
-            <p>With superpower {superPower.length}</p>
+            <p>With Super Power {superPower.length}</p>
             <p>Rich {rich.length}</p>
             <p>Genius {genius.length}</p>
         </div>

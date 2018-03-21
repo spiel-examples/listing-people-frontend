@@ -1,14 +1,14 @@
 import { h } from "spiel-client";
 import { IAddForm, IEvent, IField, IForm } from "../../helpers";
-import "./AddForm.scss";
+import { Error, FormComponent, Label, Submit} from "./AddFormStyles";
 
-export function AddForm({submitForm, fields, form, title, submitTitle, checkForm, textForm}: IAddForm) {
+export function AddForm({submitForm, fields, form, title, submitTitle, checkForm, textForm, error}: IAddForm) {
     const template = fields.map((field: IField) => {
         let fragment = null;
 
         if (field.type === "text") {
             fragment = <div class="form-group">
-                {(field.title) ? <label></label> : null}
+                {(field.title) ? <Label></Label> : null}
                 <input
                     class="form-control"
                     type={field.type}
@@ -23,7 +23,7 @@ export function AddForm({submitForm, fields, form, title, submitTitle, checkForm
             </div>;
         } else if (field.type === "checkbox") {
             fragment = <div class="form-group">
-                {(field.title) ? <label>{field.title}</label> : null}
+                {(field.title) ? <Label>{field.title}</Label> : null}
                 <input
                     type={field.type}
                     checked={form[field.name]}
@@ -39,17 +39,18 @@ export function AddForm({submitForm, fields, form, title, submitTitle, checkForm
         return fragment;
     });
     return (
-        <div class= "form-component">
+        <FormComponent>
             <h2>{title}</h2>
             <div class="form">
                 <div class="form-inline">
                     {template}
-                    <button class="submit btn btn-success" onclick={() => submitForm(form)}>Add</button>
+                    <Submit class="btn btn-success" onclick={() => submitForm(form)}>Add</Submit>
                 </div>
             </div>
-            <div class="message">
-                <span></span>
-            </div>
-        </div>
+            {(error) ?
+                <div>
+                    <Error>{error}</Error>
+                </div> : null}
+        </FormComponent>
     );
 }

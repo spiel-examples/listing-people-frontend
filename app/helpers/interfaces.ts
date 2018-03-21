@@ -41,6 +41,7 @@ export interface IAddForm {
     textForm?: (event: IEvent, field: IField) => void;
     checkForm?: (event: IEvent, field: IField) => void;
     form: IForm;
+    error?: string;
     submitTitle: string;
     title: string;
 }
@@ -70,7 +71,6 @@ export interface IFilter {
 export interface IListState extends ISidebar {
     lastState: any;
     totalPeople: IPerson[];
-    error: boolean;
     form: IForm;
     message: string;
     params: IFilter;

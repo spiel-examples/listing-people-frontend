@@ -6,6 +6,7 @@
     "jsRules": {},
     "rules": {
       "no-console": false,
+      "no-var-requires": false,
       "no-unused-expression": [
         true,
         "allow-new"

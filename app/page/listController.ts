@@ -29,7 +29,7 @@ export class ListController {
         },
     ];
     public titles: string[] = ["Name", "Super Power", "Rich", "Genius", "Delete"];
-    private state: IListState;
+    public state: IListState;
     private view: View;
     private peopleService: IPeople = services.People;
     private orderBy!: string;
@@ -67,17 +67,26 @@ export class ListController {
             await this.peopleService.addPerson(null, null, person);
             this.cleanForm();
             this.filterTable("");
+            this.getPeople();
         } catch (error) {
-            this.state.error = true;
-            this.state.message = error.message;
+            console.log(this.state.form);
+
+            if (!this.state.form.name) {
+                this.state.message = "The field is empty";
+            } else {
+                this.state.message = "The name is already in the list";
+            }
 
             render(this.view, this.state);
+            setTimeout(() => {
+                this.state.message = "";
+                render(this.view, this.state);
+            }, 2000);
         }
     }
 
     public async deletePerson(id: string) {
         try {
-            console.log(id);
             const user = {
                 id,
             };
@@ -101,9 +110,7 @@ export class ListController {
 
     public filterTable(filter: string) {
         const path = (filter) ? `/list/${filter}` : "/list";
-        this.state.params = {filter};
         srouter.go(path);
-        this.getPeople();
     }
 
     public orderCols(colName: string) {

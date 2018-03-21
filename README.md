@@ -26,3 +26,7 @@ First you need install and execute the [listing-people-api](https://github.com/s
 Now run:
 
 `npm run watch`
+
+## Run Tests
+
+`npm test`
