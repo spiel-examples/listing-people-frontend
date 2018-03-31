@@ -4,15 +4,14 @@ import {list} from "./page";
 
 export const routes: IConfigRouters = {
     default: "/list",
-    hash: "!#",
+    genericHooks: listHooks,
+    hash: "#",
     rootPath: "http://localhost:3000",
     routers: [{
-        hooks: listHooks,
         page: list,
         path: "/list/:filter",
     },
     {
-        hooks: listHooks,
         page: list,
         path: "/list",
     }],

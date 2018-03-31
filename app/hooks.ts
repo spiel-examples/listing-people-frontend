@@ -1,7 +1,7 @@
-import { IHooks } from "spiel-client";
+import { IGenericHooks, srouter } from "spiel-client";
 import { list, ListController } from "./page";
 
-export const listHooks: IHooks = {
+export const listHooks: IGenericHooks = {
     after: (params) => {
         const listController = new ListController(list.state as any, list.view);
         if (params && params.filter) {
